@@ -11,17 +11,18 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  authentication: {
-    password: { type: String, required: true, select: false },
-    salt: { type: String, select: false },
-    sessionToken: { type: String, select: false },
-  },
+  password:{ type: String, required: true, select: false }
+  // authentication: {
+  //   password: { type: String, required: true, select: false },
+  //   salt: { type: String, select: false },
+  //   sessionToken: { type: String, select: false },
+  // },
 });
 export const userModel = mongoose.model("User", userSchema);
 
 export const getAllUsers = () => userModel.find();
 
-export const getUserByEmail = (email: string) => userModel.find({ email });
+export const getUserByEmail = (email: string) => userModel.findOne({ email });
 
 export const getUserByPhone = (phone: number) => userModel.findOne({ phone });
 

@@ -6,5 +6,4 @@ export const connectToDb = () => {
   mongoose.connect(MONGO_URL);
   mongoose.connection.on("error", (error: Error) => console.log(error));
     mongoose.connection.on("connection", () => console.log("Connected"));
-    console.log("Coonectf tp dn",MONGO_URL)
 };
