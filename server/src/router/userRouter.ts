@@ -1,4 +1,4 @@
-import { signIn } from '../controller/userController';
+import { loginIn, signIn } from '../controller/userController';
 import express from 'express';
 
 // route.get('/login', login)
@@ -10,6 +10,7 @@ route.post('/addUser',signIn)
 // // Routes that will automatically check the middleware
 // route.get('/products', fetchAllProducts);
 // route.get('/product/:id', getProductById);
+route.post('/login', loginIn);
 
 export default route
 
