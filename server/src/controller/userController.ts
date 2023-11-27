@@ -15,7 +15,6 @@ console.log(dataByEmail,'data by emial')
         return res.json({message:"Email already exists"})
     }
     const dataByPhone = await getUserByPhone(phone);
-    console.log(dataByPhone,'by phone')
     if (dataByPhone) {
       return res.json({message:"Phone Number already exists"})
   }
