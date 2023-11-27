@@ -22,9 +22,11 @@ export const userModel = mongoose.model("User", userSchema);
 
 export const getAllUsers = () => userModel.find();
 
-export const getUserByEmail = (email: string) => userModel.findOne({ email });
+export const getUserByEmail = (email: string) => userModel.findOne({ email }).select('password');
 
 export const getUserByPhone = (phone: number) => userModel.findOne({ phone });
+
+export const getUserByUsername = (username:string) => userModel.findOne({username})
 
 export const createUser = (values: Record<string, any>) =>
   new userModel(values).save().then((user) => user.toObject());

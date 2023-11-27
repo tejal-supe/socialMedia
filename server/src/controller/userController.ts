@@ -1,4 +1,5 @@
-import { createUser, getUserByEmail, getUserByPhone } from "../db/user";
+import { checkPassword } from "../helpers/index";
+import { createUser, getUserByEmail, getUserByPhone, getUserByUsername } from "../db/user";
 import express from "express";
 
 export const signIn = async (req: express.Request, res: express.Response) => {
@@ -32,3 +33,51 @@ console.log(dataByEmail,'data by emial')
     console.log(error);
   }
 };
+
+
+export const loginIn = async (req: express.Request, res: express.Response) => {
+  try {
+    const { password, emailOrUsername } = req.body;
+    // no data
+    if (!password || !emailOrUsername) {
+      return res.json({message:"Enter all the details"})
+    }
+    const email = emailOrUsername
+    const username = emailOrUsername
+    const userByEmail = (await getUserByEmail(email));
+    const userByUsername = await getUserByUsername(username);
+
+    //email present
+    if (userByEmail) {
+      const matched = await checkPassword(password, userByEmail)
+      if (matched) {
+        res.json({message:"Logged in success!"})
+      }
+      else {
+        res.json({message:"Password does not match"})
+      }
+      
+    }
+
+    //username present
+    if (userByUsername) {
+      
+    }
+
+    if (!userByEmail ) {
+      return res.json({ message: "User does not exists!" });
+      
+    }
+
+    //email - no username -yes and vice versa
+
+    // if no email and no username 
+
+
+
+
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(403);
+  }
+}
