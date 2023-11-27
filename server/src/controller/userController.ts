@@ -61,10 +61,16 @@ export const loginIn = async (req: express.Request, res: express.Response) => {
 
     //username present
     if (userByUsername) {
-      
+      const matched = await checkPassword(password, userByUsername)
+      if (matched) {
+        res.json({message:"Logged in success!"})
+      }
+      else {
+        res.json({message:"Password does not match"})
+      }
     }
 
-    if (!userByEmail ) {
+    if (!userByEmail && !userByUsername ) {
       return res.json({ message: "User does not exists!" });
       
     }

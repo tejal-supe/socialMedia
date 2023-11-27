@@ -26,7 +26,7 @@ export const getUserByEmail = (email: string) => userModel.findOne({ email }).se
 
 export const getUserByPhone = (phone: number) => userModel.findOne({ phone });
 
-export const getUserByUsername = (username:string) => userModel.findOne({username})
+export const getUserByUsername = (username:string) => userModel.findOne({username}).select('password');
 
 export const createUser = (values: Record<string, any>) =>
   new userModel(values).save().then((user) => user.toObject());
